@@ -1,0 +1,51 @@
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white border border-gray-300 rounded-md shadow-md">
+    <thead class="bg-gray-100">
+      <tr>
+        <th *ngFor="let key of attributeKeys" class="py-2 px-4 border-b">
+          {{ showAttributes[key] | titlecase }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedData">
+        <td *ngFor="let key of attributeKeys" class="py-2 px-4 border-b">
+          <ng-container *ngIf="key === 'Car Id'">
+            {{ item.car?.id || 'N/A' }}
+          </ng-container>
+          <ng-container *ngIf="key !== 'Car Id'">
+            {{ item[key] || 'N/A' }}
+          </ng-container>
+        </td>
+      
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination Controls -->
+  <div class="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-200 sm:px-6">
+    <div class="flex-1 flex justify-between sm:hidden">
+      <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
+        Previous
+      </button>
+      <button (click)="onPageChange(currentPage + 1)" [disabled]="!hasNextPage()" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
+        Next
+      </button>
+    </div>
+    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+      <div>
+        <p class="text-sm text-gray-700">
+          Page <span class="font-medium">{{ currentPage }}</span>
+        </p>
+      </div>
+      <div>
+        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
+          Previous
+        </button>
+        <button (click)="onPageChange(currentPage + 1)" [disabled]="!hasNextPage()" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

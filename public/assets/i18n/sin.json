@@ -1,0 +1,38 @@
+{
+  
+    "DASHBOARD": {
+       "LANGUAGE" :"සිංහල",
+      "TITLE": "ඩැෂ්බෝඩ්ය",
+      "CAR_COUNT": "සේවා මධ්‍යස්ථානයේ වාහන ගණන",
+      "JOB_COUNT": "වත්මන් සේවා ගණන",
+      "STATUS": "තත්වය"
+    },
+    "ADD_CAR": {
+      "DESC_CAR":"මෝටර් රථය ඇතුළු කරන්න",
+      "ID_LABEL": "අංකය:",
+      "CHASSIS_LABEL": "චැසි අංකය:",
+      "MODEL_LABEL": "මොඩලය:",
+      "YEAR_LABEL": "නිෂ්පාදිත වර්ෂය:",
+      "SUBMIT_BUTTON": "මෝටර් රථය ඇතුළත් කරන්න"
+    },
+    "ADD_JOB": {
+      "ID_LABEL": "අංකය:",
+      "CAR_ID_LABEL": "වාහන අයිඩිය:",
+      "DESC_JOB" : "සේවාව ඇතුළු කරන්න",
+      "DESCRIPTION_LABEL": "විස්තරය:",
+      "STATUS_LABEL": "තත්වය:",
+      "SUBMIT_BUTTON": "සේවාව ඇතුළත් කරන්න"
+    },
+    "ERROR":{
+      "CHASSISNO_REQUIRED":"චැසි අංකය ඇතුළත් කරන්න",
+      "MODEL_REQUIRED":"මොඩලය ඇතුළත් කරන්න",
+      "YEAR_REQUIRED":"නිෂ්පාදිත වර්ෂය ඇතුළත් කරන්න",
+      "CARID_REQUIRED":"වාහන අයිඩිය තෝරන්න",
+      "JOBDESCRIPTION_VALID":"නිවැරදි විස්තරය ඇතුළත් කරන්න",
+      "JOBDESCRIPTION_REQUIRED":"සේවා විස්තරය ඇතුළත් කරන්න",
+      "CHASSISNO_VALID":"නිවැරදි චැසි අංකය ඇතුළත් කරන්න",
+      "MODEL_VALID":"නිවැරදි මොඩලය ඇතුළත් කරන්න",
+      "YEAR_VALID":"නිවැරදි නිෂ්පාදිත වර්ෂය ඇතුළත් කරන්න"
+    }
+  }
+  

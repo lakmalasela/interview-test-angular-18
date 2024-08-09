@@ -1,0 +1,48 @@
+{
+  
+    "DASHBOARD": {
+      "LANGUAGE" :"English",
+      "TITLE": "Dashboard",
+      "CAR_COUNT": "Number of cars in service center",
+      "JOB_COUNT": "Number of jobs in progress",
+      "STATUS": "Status",
+      "STATISTICS": "Summery"
+    },
+    "ADD_CAR": {
+      "DESC_CAR":"Add Car",
+    
+
+      "ID_LABEL": "ID:",
+      "CHASSIS_LABEL": "Chassis number:",
+      "MODEL_LABEL": "Model:",
+      "YEAR_LABEL": "Manufactured Year:",
+      "SUBMIT_BUTTON": "Add Car"
+    },
+    "ADD_JOB": {
+      "TITLE":"Add Job",
+      "ID_LABEL": "ID:",
+      "CAR_ID_LABEL": "Car ID:",
+      "DESC_JOB":"Add Job",
+      "DESCRIPTION_LABEL": "Description:",
+      "STATUS_LABEL": "Status:",
+      "SUBMIT_BUTTON": "Add Job"
+    },
+    "ERROR":{
+      "CHASSISNO_REQUIRED":"Chassis number is Required",
+      "MODEL_REQUIRED":"Model is Required",
+      "YEAR_REQUIRED":"Manufacturered is Required",
+
+      "CHASSISNO_VALID":"Enter a valid Name",
+      "MODEL_VALID":"Enter a Valid Model",
+      "YEAR_VALID":"Enter a Valid Manufactured Year",
+
+      "CARID_REQUIRED":"Car ID is Required",
+
+      "JOBDESCRIPTION_REQUIRED":"Job Description is Required",
+      "JOBDESCRIPTION_VALID" :"Enter the Valid Job Description"
+
+
+
+    }
+  }
+  

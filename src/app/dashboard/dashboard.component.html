@@ -1,0 +1,28 @@
+<div class="container mx-auto p-6">
+  <!-- Dashboard Overview -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <!-- Total Cars Card -->
+    <div class="bg-white shadow-md rounded-lg p-6 flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl font-semibold">{{ 'DASHBOARD.CAR_COUNT' | translate }}</h2>
+        <p class="text-4xl font-bold">{{ totalCars$ | async }}</p>
+      </div>
+      <div class="text-blue-500">
+        <img src="assets/img/car.png" alt="Car Icon" class="h-20 w-30">
+      </div>
+    </div>
+
+    <!-- Jobs In Progress Card -->
+    <div class="bg-white shadow-md rounded-lg p-6 flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl font-semibold">{{ 'DASHBOARD.JOB_COUNT' | translate }}</h2>
+        <p class="text-4xl font-bold">{{ totalJobs$ | async }}</p>
+       
+      </div>
+      <div class="text-blue-500">
+        <img src="assets/img/service.png" alt="Car Icon" class="h-20 w-40">
+      </div>
+    </div>
+  </div>
+</div>
+

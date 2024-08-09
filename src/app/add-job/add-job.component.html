@@ -1,0 +1,182 @@
+<div class="container mx-auto p-6">
+  <div class="flex gap-4">
+    <!-- Add Car Form -->
+    <div class="w-1/2">
+      <div class="flex items-center gap-4 flex-1">
+        <img src="assets/img/j2.jpg" alt="Car Icon" class="h-20 px-10">
+      </div>
+      <form
+        (ngSubmit)="addJob(jobForm)"
+        #jobForm="ngForm"
+        class="max-w-lg mx-auto p-4 border border-gray-300 rounded-md shadow-md bg-white"
+      >
+        <div class="mb-4">
+          <label
+            for="id"
+            class="block text-gray-700 text-sm font-semibold mb-2"
+            >{{ "ADD_JOB.ID_LABEL" | translate }}</label
+          >
+          <input
+            id="jobid"
+            [(ngModel)]="job.id"
+            name="id"
+            disabled
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-white-500 sm:text-sm"
+          />
+        </div>
+        <label for="carid" class="block text-gray-700 text-sm font-semibold mb-2">
+          {{ "ADD_JOB.CAR_ID_LABEL" | translate }}
+        </label>
+        <select
+          name="carid"
+          #carId="ngModel"
+          id="carid"
+          [(ngModel)]="job.car"
+          [ngClass]="{
+            'border-red-500': carId.invalid && (carId.dirty || carId.touched),
+            'border-gray-300': !(
+              carId.invalid &&
+              (carId.dirty || carId.touched)
+            )
+          }"
+          class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+          required
+        >
+          <option value="" disabled>Select the Car ID</option>
+          <option *ngFor="let car of cars" [ngValue]="car">{{ car.id }}</option>
+        </select>
+        <div
+          *ngIf="carId.invalid && (carId.dirty || carId.touched)"
+          class="text-red-500 text-sm mt-1"
+        >
+          <div *ngIf="carId.errors?.['required']">
+            {{ "ERROR.CARID_REQUIRED" | translate }}
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label
+            for="model"
+            class="block text-gray-700 text-sm font-semibold mb-2"
+            >{{ "ADD_JOB.DESCRIPTION_LABEL" | translate }}</label
+          >
+          <input
+            id="model"
+            [(ngModel)]="job.jobdescription"
+            name="jobdescription"
+            #jobDescription="ngModel"
+            required
+            [ngClass]="{
+              'border-green-800':
+                jobDescription.valid &&
+                (jobDescription.dirty || jobDescription.touched),
+              'border-red-500':
+                jobDescription.invalid &&
+                (jobDescription.dirty || jobDescription.touched),
+              'border-gray-300': !(
+                jobDescription.dirty || jobDescription.touched
+              )
+            }"
+            pattern=".*$"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-white-500 sm:text-sm"
+          />
+          <div
+            *ngIf="
+              jobDescription.invalid &&
+              (jobDescription.dirty || jobDescription.touched)
+            "
+            class="border-red-500"
+          >
+            <div *ngIf="jobDescription.errors?.['required']">
+              {{ "ERROR.JOBDESCRIPTION_REQUIRED" | translate }}
+            </div>
+            <div *ngIf="jobDescription.errors?.['pattern']">
+              {{ "ERROR.JOBDESCRIPTION_VALID" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="status" class="block text-gray-700 text-sm font-semibold mb-2">
+            {{ "ADD_JOB.STATUS_LABEL" | translate }}
+          </label>
+          <select
+            name="status"
+            #status="ngModel"
+            id="status"
+            [(ngModel)]="job.status"
+            [ngClass]="{
+              'border-red-500':
+                status.invalid && (status.dirty || status.touched),
+              'border-gray-300': !(
+                status.invalid &&
+                (status.dirty || status.touched)
+              )
+            }"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+            required
+          >
+            <option *ngFor="let option of statusOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+
+        <div
+          *ngIf="status.invalid && (status.dirty || status.touched)"
+          class="text-red-500 text-sm mt-1"
+        >
+          <div *ngIf="status.errors?.['required']">
+            {{ "ERROR.STATUS_REQUIRED" | translate }}
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          {{ "ADD_JOB.SUBMIT_BUTTON" | translate }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Car Table -->
+    <div class="w-1/2">
+      <!-- <app-table [data$]="jobs$" [showAttributes]="jobAttributes"  [hasActions]="true" [actionsTemplate]="actionsTemplate"></app-table> -->
+      <app-table [data$]="jobs$" [showAttributes]="jobAttributes"></app-table>
+
+      </div>
+  </div>
+</div>
+
+<style>
+  .invalid-input {
+    border-color: red;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+  }
+</style>
+
+
+<!-- add-job.component.html -->
+<div>
+  <!-- Confirmation Box -->
+  <div *ngIf="showConfirmation" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+      <h3 class="text-lg font-semibold">Confirmation</h3>
+      <p class="mt-2">{{ confirmationMessage }}</p>
+      <div class="mt-4 flex justify-center gap-4">
+        <button (click)="confirmAddition()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          OK
+        </button>
+        <button (click)="closeConfirmation()" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

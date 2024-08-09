@@ -1,0 +1,103 @@
+<div class="container mx-auto p-6">
+  <div class="flex gap-4">
+  <!-- Add Car Form -->
+    <div class="w-1/2">
+      <div class="flex items-center gap-4 flex-1">
+        <img src="assets/img/car.png" alt="Car Icon" class="h-20 px-10">
+  
+      </div>
+      <form (ngSubmit)="addCar(form)" #form="ngForm" class="max-w-lg mx-auto p-4 border border-gray-300 rounded-md shadow-md bg-white">
+        <div class="mb-4">
+          <label for="id" class="block text-gray-700 text-sm font-semibold mb-2">{{ 'ADD_CAR.ID_LABEL' | translate }}</label>
+          <input id="id" [(ngModel)]="car.id" name="id" disabled class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-white-500 sm:text-sm">
+        </div>
+      
+        <div class="mb-4">
+          <label for="chassisnumber" class="block text-gray-700 text-sm font-semibold mb-2">{{ 'ADD_CAR.CHASSIS_LABEL' | translate }}</label>
+          <input id="chassisnumber" 
+            [(ngModel)]="car.chassisnumber" 
+            name="chassisnumber" 
+            #chassisNumber="ngModel"
+            required
+            [ngClass]="{
+              'border-green-800': chassisNumber.valid && (chassisNumber.dirty || chassisNumber.touched),
+              'border-red-500': chassisNumber.invalid && (chassisNumber.dirty || chassisNumber.touched),
+              'border-gray-300': !(chassisNumber.dirty || chassisNumber.touched)
+            }"
+            pattern=".*$"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-white-500 sm:text-sm">
+          <div *ngIf="chassisNumber.invalid && (chassisNumber.dirty || chassisNumber.touched)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="chassisNumber.errors?.['required']">{{ 'ERROR.CHASSISNO_REQUIRED' | translate }}</div>
+            <div *ngIf="chassisNumber.errors?.['pattern']">{{ 'ERROR.CHASSISNO_VALID' | translate }}</div>
+          </div>
+        </div>
+      
+        <div class="mb-4">
+          <label for="model" class="block text-gray-700 text-sm font-semibold mb-2">{{ 'ADD_CAR.MODEL_LABEL' | translate }}</label>
+          <input id="model" 
+            [(ngModel)]="car.model" 
+            name="model" 
+            #modelNumber="ngModel"
+            required
+            [ngClass]="{
+              'border-green-800': modelNumber.valid && (modelNumber.dirty || modelNumber.touched),
+              'border-red-500': modelNumber.invalid && (modelNumber.dirty || modelNumber.touched),
+              'border-gray-300': !(modelNumber.dirty || modelNumber.touched)
+            }"
+            pattern=".*$"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-white-500 sm:text-sm">
+          <div *ngIf="modelNumber.invalid && (modelNumber.dirty || modelNumber.touched)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="modelNumber.errors?.['required']">{{ 'ERROR.MODEL_REQUIRED' | translate }}</div>
+            <div *ngIf="modelNumber.errors?.['pattern']">{{ 'ERROR.MODEL_VALID' | translate }}</div>
+          </div>
+        </div>
+      
+        <div class="mb-4">
+          <label for="year" class="block text-gray-700 text-sm font-semibold mb-2">{{ 'ADD_CAR.YEAR_LABEL' | translate }}</label>
+          <input id="year" 
+            [(ngModel)]="car.year" 
+            name="year" 
+            #manufactureredyear="ngModel"
+            required
+            [ngClass]="{
+              'border-green-800': manufactureredyear.valid && (manufactureredyear.dirty || manufactureredyear.touched),
+              'border-red-500': manufactureredyear.invalid && (manufactureredyear.dirty || manufactureredyear.touched),
+              'border-gray-300': !(manufactureredyear.dirty || manufactureredyear.touched)
+            }"
+            pattern="^\d{4}$"
+            type="number"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-white-500 sm:text-sm">
+          <div *ngIf="manufactureredyear.invalid && (manufactureredyear.dirty || manufactureredyear.touched)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="manufactureredyear.errors?.['required']">{{ 'ERROR.YEAR_REQUIRED' | translate }}</div>
+            <div *ngIf="manufactureredyear.errors?.['pattern']">{{ 'ERROR.YEAR_VALID' | translate }}</div>
+          </div>
+        </div>
+      
+        <button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          {{ 'ADD_CAR.SUBMIT_BUTTON' | translate }}
+        </button>
+      </form>
+    </div>
+    
+    <!-- Car Table -->
+    <div class="w-1/2">
+      <!-- <app-car-table></app-car-table> -->
+      <app-table [data$]="cars$" [showAttributes]="carAttributes"></app-table>    </div>
+  </div>
+</div>
+
+  <!-- Confirmation Box -->
+  <div *ngIf="showConfirmation" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+      <h3 class="text-lg font-semibold">Confirmation</h3>
+      <p class="mt-2">{{ confirmationMessage }}</p>
+      <div class="mt-4 flex justify-center gap-4">
+        <button (click)="confirmAddition()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+          OK
+        </button>
+        <button (click)="closeConfirmation()" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
